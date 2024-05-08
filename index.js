@@ -1,17 +1,15 @@
-function allPathsSourceTarget(graph) {
-  const result = [];
-  const target = graph.length - 1;
-  dfs(graph, 0, [0]);
-  function dfs(graph, node, path) {
-    if (node === target) {
-      result.push([...path]);
-      return;
-    }
-    for (const neighbor of graph[node]) {
-      path.push(neighbor);
-      dfs(graph, neighbor, path);
-      path.pop();
-    }
+function removeNthFromEnd(head, n) {
+  const dummy = new ListNode(0);
+  dummy.next = head;
+  let first = dummy;
+  let second = dummy;
+  for (let i = 0; i <= n; i++) {
+    first = first.next;
   }
-  return result;
+  while (first !== null) {
+    first = first.next;
+    second = second.next;
+  }
+  second.next = second.next.next;
+  return dummy.next;
 }
