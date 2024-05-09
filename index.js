@@ -1,15 +1,17 @@
-function removeNthFromEnd(head, n) {
-  const dummy = new ListNode(0);
-  dummy.next = head;
-  let first = dummy;
-  let second = dummy;
-  for (let i = 0; i <= n; i++) {
-    first = first.next;
+function combinationSum3(k, n) {
+  const result = [];
+  backtrack([], 1, k, n);
+  return result;
+  function backtrack(combination, start, k, n) {
+    if (n === 0 && k === 0) {
+      result.push([...combination]);
+      return;
+    }
+    if (n < 0 || k === 0) return;
+    for (let i = start; i <= 9; i++) {
+      combination.push(i);
+      backtrack(combination, i + 1, k - 1, n - i);
+      combination.pop();
+    }
   }
-  while (first !== null) {
-    first = first.next;
-    second = second.next;
-  }
-  second.next = second.next.next;
-  return dummy.next;
 }
