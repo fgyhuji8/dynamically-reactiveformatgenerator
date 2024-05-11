@@ -1,4 +1,6 @@
-function findKthLargest(nums, k) {
-  nums.sort((a, b) => b - a);
-  return nums[k - 1];
-}
+const gcdRecursive = (a, b) => {
+  if (b === 0) {
+    return a;
+  }
+  return gcdRecursive(b, a % b);
+};
