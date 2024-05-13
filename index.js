@@ -1,24 +1,13 @@
-function isValidSudoku(board) {
-  const rows = Array(9)
-    .fill()
-    .map(() => new Set());
-  const cols = Array(9)
-    .fill()
-    .map(() => new Set());
-  const boxes = Array(9)
-    .fill()
-    .map(() => new Set());
-  for (let i = 0; i < 9; i++) {
-    for (let j = 0; j < 9; j++) {
-      const num = board[i][j];
-      if (num === ".") continue;
-      const boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
-      if (rows[i].has(num) || cols[j].has(num) || boxes[boxIndex].has(num))
-        return false;
-      rows[i].add(num);
-      cols[j].add(num);
-      boxes[boxIndex].add(num);
+function maxSlidingWindow(nums, k) {
+  const result = [];
+  const queue = [];
+  for (let i = 0; i < nums.length; i++) {
+    while (queue.length && nums[i] >= nums[queue[queue.length - 1]]) {
+      queue.pop();
     }
+    queue.push(i);
+    if (queue[0] === i - k) queue.shift();
+    if (i >= k - 1) result.push(nums[queue[0]]);
   }
-  return true;
+  return result;
 }
